@@ -8,8 +8,14 @@ function getRandomInteger(fromValue, toValue) {
   }
   // ПРИДУМАЛА,КАК ФУНКЦИЯ БУДЕТ ВЕСТИ СЕБЯ,ЕСЛИ ПЕРЕДАТЬ ЗНАЧЕНИЕ "ДО" МЕНЬШЕ,ЧЕМ ЗНАЧЕНИЕ "ОТ",ИЛИ РАВНОЕ ЕМУ.
   // ФУНКЦИЯ МОЖЕТ ВЕРНУТЬ ЗНАЧЕНИЕ NaN.
-  if (toValue <= fromValue) {
-    return NaN;
+  // if (toValue <= fromValue) {
+  //   return NaN;
+  // }
+  // ИЛИ(ПО ЗАДАНИЮ)МЫ МОЖЕМ ПРОВЕРИТЬ,КАКОЙ ИЗ АРГУМЕНТОВ БОЛЬШЕ,А КАКОЙ МЕНЬШЕ,И ПРИ НЕОБХОДИМОСТИ ПОМЕНЯТЬ ИХ МЕСТАМИ.
+  if (toValue < fromValue) {
+    const tempValue = toValue;
+    toValue = fromValue;
+    fromValue = tempValue;
   }
 
   const randomValue = fromValue + Math.random() * (toValue - fromValue);
@@ -35,7 +41,7 @@ console.log(getRandomInteger(0, 1000));
 // НАПИСАН ВАРИАНТ ЭТОЙ ЖЕ ФУНКЦИИ ПРЕПОДАВАТЕЛЕМ.(ЭТОТ ВАРИАНТ НАПИСАНИЯ ПРАВИЛЬНЫЙ)
 // eslint-disable-next-line no-unused-vars
 function checkMaxLineLength(checkingString, maxLength) {
-  return checkingString.length < maxLength;
+  return checkingString.length <= maxLength;
 }
 
 // eslint-disable-next-line no-console, no-undef
