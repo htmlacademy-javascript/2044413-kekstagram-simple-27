@@ -44,7 +44,7 @@ function checkMaxLineLength(checkingString, maxLength) {
   return checkingString.length <= maxLength;
 }
 
-// eslint-disable-next-line no-console, no-undef
+// eslint-disable-next-line no-console
 console.log(checkMaxLineLength('Hello', 500));
 
 // ДЗ Module4-task1 //
@@ -61,15 +61,13 @@ const PHOTO_DESCRIPTION_LIST = [
 
 // создаем функцию, которая будет генерировать(создавать) объект
 const generatePhotoData = function (value) {
-  const data = {
+  return {
     id: value,
     url: `photos/${value}.jpg`,
     description: PHOTO_DESCRIPTION_LIST[getRandomInteger(0, PHOTO_DESCRIPTION_LIST.length - 1)],
     likes: getRandomInteger(15, 200),
     comments: getRandomInteger(0, 200),
   };
-
-  return data;
 };
 
 // создаем функцию, которая будет генерировать(создавать) 25 объектов(список объектов)
