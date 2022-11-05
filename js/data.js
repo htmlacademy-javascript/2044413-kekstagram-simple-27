@@ -36,4 +36,4 @@ const generatePhotoDataList = function () {
   return list;
 };
 
-export { generatePhotoDataList };
+export {generatePhotoDataList};

@@ -3,6 +3,7 @@
 import { checkMaxLineLength } from './util.js';
 import { generatePhotoDataList } from './data.js';
 import './picturesRendering.js';
+import './workWithForm.js';
 
 // eslint-disable-next-line no-console
 console.log(checkMaxLineLength('Hello, JavaScript!', 10));
