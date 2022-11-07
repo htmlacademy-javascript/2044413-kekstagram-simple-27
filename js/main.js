@@ -4,6 +4,8 @@ import { checkMaxLineLength } from './util.js';
 import { generatePhotoDataList } from './data.js';
 import './picturesRendering.js';
 import './workWithForm.js';
+import './scaleEditing.js';
+import './effects.js';
 
 // eslint-disable-next-line no-console
 console.log(checkMaxLineLength('Hello, JavaScript!', 10));
