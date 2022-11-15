@@ -1,9 +1,10 @@
 // effects.js - модуль, который отвечает за наложение эффекта на изображение
 
-const effectsList = document.querySelector('.effects__list');
-
-// найдем предварительный просмотр изображения
+// найдем элемент предварительного просмотра изображения
 const previewElement = document.querySelector('.img-upload__preview img');
+
+// найдем список эффектов
+const effectsList = document.querySelector('.effects__list');
 
 // По умолчанию должен быть выбран эффект «Оригинал».
 // На изображение может накладываться только один эффект.
@@ -44,14 +45,21 @@ const addEffect = function (effect) {
   // currentEffect = effect;
 };
 
+// функция, которая сбрасывает эффект изображению
+const resetEffect = function () {
+  previewElement.className = '';
+};
+
 // добавим обработчик события по кликам на эффекты
 effectsList.addEventListener('click', (evt) => {
   const effect = effects[evt.target.value];
 
-  if(effect) {
+  if (effect) {
     addEffect(effect);
   }
 });
+
+export { resetEffect };
 
 // ДАННЫЕ ДЛЯ РЕАЛИЗАЦИИ СЛАЙДЕРА (ЕСЛИ БУДЕТ ВРЕМЯ ДЕЛАТЬ(ДОП.ЗАДАНИЕ))
 // const sliderElement = document.querySelector('.effect-level__slider');

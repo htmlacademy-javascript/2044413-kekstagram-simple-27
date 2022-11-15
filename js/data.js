@@ -1,7 +1,7 @@
+// data.js - это модуль, который создает данные
+
 import {getRandomInteger} from './util.js';
 
-// ДЗ Module4-task1 //
-// data.js - это модуль, который создает данные
 // создаем массив с описанием фотографий
 const PHOTO_DESCRIPTION_LIST = [
   'Отель на берегу',

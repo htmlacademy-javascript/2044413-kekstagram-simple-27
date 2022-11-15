@@ -6,14 +6,17 @@ const pristine = new Pristine(uploadPictureForm, {
   errorTextClass: 'form__error'
 });
 
-const commentValidate = (evt) => {
+const formValidate = (evt) => {
   if (!pristine.validate()) {
     evt.preventDefault();
+    return false;
   }
+
+  return true;
 };
 
 const resetValidation = () => {
   pristine.reset();
 };
 
-export { commentValidate, resetValidation };
+export { formValidate, resetValidation };

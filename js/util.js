@@ -8,6 +8,7 @@ function getRandomInteger(fromValue, toValue) {
   if (fromValue < 0 || toValue < 0) {
     return NaN;
   }
+
   // ПРИДУМАЛА,КАК ФУНКЦИЯ БУДЕТ ВЕСТИ СЕБЯ,ЕСЛИ ПЕРЕДАТЬ ЗНАЧЕНИЕ "ДО" МЕНЬШЕ,ЧЕМ ЗНАЧЕНИЕ "ОТ",ИЛИ РАВНОЕ ЕМУ.
   // ФУНКЦИЯ МОЖЕТ ВЕРНУТЬ ЗНАЧЕНИЕ NaN.
   // if (toValue <= fromValue) {
@@ -36,8 +37,7 @@ function getRandomInteger(fromValue, toValue) {
 //   }
 // };
 
-// НАПИСАН ВАРИАНТ ЭТОЙ ЖЕ ФУНКЦИИ ПРЕПОДАВАТЕЛЕМ.(ЭТОТ ВАРИАНТ НАПИСАНИЯ ПРАВИЛЬНЫЙ)
-// eslint-disable-next-line no-unused-vars
+// НАПИСАН ВАРИАНТ ЭТОЙ ЖЕ БОЛЕЕ КОРОТКО.(ЭТОТ ВАРИАНТ НАПИСАНИЯ ПРАВИЛЬНЫЙ)
 function checkMaxLineLength(checkingString, maxLength) {
   return checkingString.length <= maxLength;
 }
@@ -47,4 +47,4 @@ function isEscapeKey(evt) {
   return evt.key === 'Escape';
 }
 
-export {getRandomInteger, checkMaxLineLength, isEscapeKey};
+export { getRandomInteger, checkMaxLineLength, isEscapeKey };
