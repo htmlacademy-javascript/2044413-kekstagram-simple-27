@@ -2,7 +2,7 @@
 
 const picturesRendering = function (photoDataList) {
   // Найдем шаблон для миниатюр
-  const pictureTemplate = document.querySelector('#picture')
+  const pictureTemplateElement = document.querySelector('#picture')
     .content
     .querySelector('.picture');
 
@@ -10,7 +10,7 @@ const picturesRendering = function (photoDataList) {
   const picturesFragment = document.createDocumentFragment();
 
   photoDataList.forEach(({ url, comments, likes }) => {
-    const cloneElement = pictureTemplate.cloneNode(true);
+    const cloneElement = pictureTemplateElement.cloneNode(true);
 
     cloneElement.querySelector('.picture__img').src = url;
     cloneElement.querySelector('.picture__comments').textContent = comments;
@@ -19,8 +19,8 @@ const picturesRendering = function (photoDataList) {
     picturesFragment.appendChild(cloneElement);
   });
 
-  const picturesBlock = document.querySelector('.pictures');
-  picturesBlock.appendChild(picturesFragment);
+  const picturesBlockElement = document.querySelector('.pictures');
+  picturesBlockElement.appendChild(picturesFragment);
 };
 
 export { picturesRendering };
