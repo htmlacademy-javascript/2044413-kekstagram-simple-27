@@ -1,4 +1,4 @@
-// WorkWithServer.js - модуль для работы с настоящим сервером
+// api.js - модуль для работы с настоящим сервером
 
 const BASE_URL = 'https://27.javascript.pages.academy/kekstagram-simple';
 
@@ -8,13 +8,13 @@ const getDataFromServer = function (onSuccess, onError) {
     .then((response) => {
       if (response.ok) {
         return response.json();
-      } else {
-        // Бросается ошибка, чтобы попасть в catch
-        throw new Error();
       }
+
+      // Бросается ошибка, чтобы прервать выполнение кода и попасть в catch
+      throw new Error();
     })
-    .then((data) => onSuccess(data))
-    .catch(() => onError());
+    .then(onSuccess)
+    .catch(onError);
 };
 
 // Функция для отправки данных на сервера
@@ -26,9 +26,17 @@ const sendDataOnServer = function (data, onSuccess, onError, onFinally) {
       body: data,
     },
   )
-    .then(() => onSuccess())
-    .catch(() => onError())
-    .finally(() => onFinally());
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+
+      // Бросается ошибка, чтобы прервать выполнение кода и попасть в catch
+      throw new Error();
+    })
+    .then(onSuccess)
+    .catch(onError)
+    .finally(onFinally);
 };
 
 export { getDataFromServer, sendDataOnServer };

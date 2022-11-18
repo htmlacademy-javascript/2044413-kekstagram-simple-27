@@ -4,12 +4,8 @@
 const previewElement = document.querySelector('.img-upload__preview img');
 
 // найдем список эффектов
-const effectsList = document.querySelector('.effects__list');
+const effectsListElement = document.querySelector('.effects__list');
 
-// По умолчанию должен быть выбран эффект «Оригинал».
-// На изображение может накладываться только один эффект.
-// При смене эффекта, выбором одного из значений среди радиокнопок .effects__radio, добавить картинке внутри .img-upload__preview CSS-класс, соответствующий эффекту.
-// Например, если выбран эффект .effect-chrome, изображению нужно добавить класс effects__preview--chrome.
 // создадим объект эффектов
 const effects = {
   none: {
@@ -42,7 +38,15 @@ const effects = {
 const addEffect = function (effect) {
   previewElement.className = '';
   previewElement.classList.add(`effects__preview--${effect.name}`);
-  // currentEffect = effect;
+};
+
+// функция, для обработчика события кликов на эффекты
+const onAddEffect = function (evt) {
+  const effect = effects[evt.target.value];
+
+  if (effect) {
+    addEffect(effect);
+  }
 };
 
 // функция, которая сбрасывает эффект изображению
@@ -51,35 +55,12 @@ const resetEffect = function () {
 };
 
 // добавим обработчик события по кликам на эффекты
-effectsList.addEventListener('click', (evt) => {
-  const effect = effects[evt.target.value];
+function addEffectsContolsListeners() {
+  effectsListElement.addEventListener('click', onAddEffect);
+}
 
-  if (effect) {
-    addEffect(effect);
-  }
-});
+function removeEffectsContolsListeners() {
+  effectsListElement.removeEventListener('click', onAddEffect);
+}
 
-export { resetEffect };
-
-// ДАННЫЕ ДЛЯ РЕАЛИЗАЦИИ СЛАЙДЕРА (ЕСЛИ БУДЕТ ВРЕМЯ ДЕЛАТЬ(ДОП.ЗАДАНИЕ))
-// const sliderElement = document.querySelector('.effect-level__slider');
-// const radioEffects = document.querySelector('.effects__radio');
-// const imagePreview = document.querySelector('.img-upload__preview');
-
-// // создание слайдера
-// noUiSlider.create(sliderElement, {
-//   range: {
-//     min: 25,
-//     max: 100,
-//   },
-//   start: 80,
-//   step: 25,
-//   connect: 'lower',
-// });
-
-// // функция для получения значения слайдера
-// sliderElement.noUiSlider.on('update', () => {
-//   valueElement.value = sliderElement.noUiSlider.get();
-// });
-
-// let currentEffect;
+export { resetEffect, addEffectsContolsListeners, removeEffectsContolsListeners };
