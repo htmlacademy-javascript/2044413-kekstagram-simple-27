@@ -15,7 +15,7 @@ const Scale = {
 
 // При изменении масштаба изображению должно добавляться соответствующее правило CSS
 const zoomImage = function (percent) {
-  imagePreviewElement.style = `transform: scale(${percent / 100})`;
+  imagePreviewElement.style.transform = `scale(${percent / 100})`;
 };
 
 
