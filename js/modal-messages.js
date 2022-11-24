@@ -3,7 +3,7 @@
 import { isEscapeKey } from './util.js';
 
 // Функция, которая обрабатывает нажатия клавиши Esc для модального окна успеха
-function onEscKeyDownSuccessMessage(evt) {
+const onEscKeyDownSuccessMessage = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
 
@@ -11,21 +11,24 @@ function onEscKeyDownSuccessMessage(evt) {
 
     successModalElement.remove();
   }
-}
+};
 
 // Функция, которая обрабатывает нажатия клавиши Esc для модального окна ошибки
-function onEscKeyDownErrorMessage(evt) {
+const onEscKeyDownErrorMessage = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
+    evt.stopPropagation();
 
     const errorModalElement = document.querySelector('.error');
 
-    errorModalElement.remove();
+    if(errorModalElement) {
+      errorModalElement.remove();
+    }
   }
-}
+};
 
 // Функция, которая обрабатывает клик вне модального окна успеха
-function onClickOutSuccessMessage(evt) {
+const onClickOutSuccessMessage = (evt) => {
   const successModalElement = document.querySelector('.success');
 
   if (successModalElement) {
@@ -35,10 +38,10 @@ function onClickOutSuccessMessage(evt) {
       successModalElement.remove();
     }
   }
-}
+};
 
 // Функция, которая обрабатывает клик вне модального окна ошибки
-function onClickOutErrorMessage(evt) {
+const onClickOutErrorMessage = (evt) => {
   const errorModalElement = document.querySelector('.error');
 
   if (errorModalElement) {
@@ -48,10 +51,10 @@ function onClickOutErrorMessage(evt) {
       errorModalElement.remove();
     }
   }
-}
+};
 
 // Показывается соответствующее сообщение, если отправка данных прошла успешно
-const successMessage = function () {
+const successMessage = () => {
   // Найдем шаблон template
   const samplSuccessTemplateElement = document.querySelector('#success')
     .content
@@ -79,7 +82,7 @@ const successMessage = function () {
 // Показывается соответствующее сообщение, если отправка данных прошла с ошибкой
 // Сделаем модальное окно более универсальным, чтобы можно было переиспользовать
 // и передать текст сообщения и текст кнопки если оно отличется от стандартного
-const errorMessage = function (textMessage, textButton) {
+const errorMessage = (textMessage, textButton) => {
   // Найдем шаблон template
   const sampleErrorTemplateElement = document.querySelector('#error')
     .content

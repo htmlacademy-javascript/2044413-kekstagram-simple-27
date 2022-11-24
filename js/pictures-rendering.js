@@ -1,26 +1,26 @@
 // picturesRendering.js - это модуль, которный отвечает за отрисовку миниатюр.
 
-const picturesRendering = function (photoDataList) {
+const picturesRendering = (photoDataList) => {
   // Найдем шаблон для миниатюр
   const pictureTemplateElement = document.querySelector('#picture')
     .content
     .querySelector('.picture');
 
   // Создадим контейнер для будущих картинок
-  const picturesFragment = document.createDocumentFragment();
+  const pictureListFragment = document.createDocumentFragment();
 
   photoDataList.forEach(({ url, comments, likes }) => {
-    const cloneElement = pictureTemplateElement.cloneNode(true);
+    const newPictureElement = pictureTemplateElement.cloneNode(true);
 
-    cloneElement.querySelector('.picture__img').src = url;
-    cloneElement.querySelector('.picture__comments').textContent = comments;
-    cloneElement.querySelector('.picture__likes').textContent = likes;
+    newPictureElement.querySelector('.picture__img').src = url;
+    newPictureElement.querySelector('.picture__comments').textContent = comments;
+    newPictureElement.querySelector('.picture__likes').textContent = likes;
 
-    picturesFragment.appendChild(cloneElement);
+    pictureListFragment.appendChild(newPictureElement);
   });
 
-  const picturesBlockElement = document.querySelector('.pictures');
-  picturesBlockElement.appendChild(picturesFragment);
+  const picturesListСontainerElement = document.querySelector('.pictures');
+  picturesListСontainerElement.appendChild(pictureListFragment);
 };
 
 export { picturesRendering };

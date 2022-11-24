@@ -1,12 +1,12 @@
-const uploadPictureFormElement = document.querySelector('.img-upload__form');
+const imageUploadFormElement = document.querySelector('.img-upload__form');
 
-const pristine = new Pristine(uploadPictureFormElement, {
+const pristine = new Pristine(imageUploadFormElement, {
   classTo: 'img-upload__text',
   errorTextParent: 'img-upload__text',
   errorTextClass: 'form__error'
 });
 
-const onFormValidate = function(evt) {
+const onFormValidate = (evt) => {
   if (!pristine.validate()) {
     evt.preventDefault();
     return false;
@@ -15,7 +15,7 @@ const onFormValidate = function(evt) {
   return true;
 };
 
-const resetValidation = function() {
+const resetValidation = () => {
   pristine.reset();
 };
 
