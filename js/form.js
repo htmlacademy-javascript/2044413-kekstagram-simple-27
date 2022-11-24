@@ -17,7 +17,7 @@ const textDescriptionElement = formElement.querySelector('.text__description');
 
 
 // Функция, которая обрабатывает нажатия клавиши Esc
-function onEscKeyDown(evt) {
+const onEscKeyDown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
 
@@ -32,10 +32,36 @@ function onEscKeyDown(evt) {
       onCloseForm();
     }
   }
-}
+};
+
+// Функция обработки отправки формы
+const onUserFormSubmit = (evt) => {
+  evt.preventDefault();
+
+  const imageUploadFormSubmitElement = document.querySelector('.img-upload__submit');
+  imageUploadFormSubmitElement.setAttribute('disabled', true);
+
+  const isValid = onFormValidate(evt);
+
+  if (isValid) {
+    const formData = new FormData(evt.target);
+
+    sendDataOnServer(
+      formData,
+      () => {
+        onCloseForm();
+        successMessage();
+      },
+      () => errorMessage(),
+      () => imageUploadFormSubmitElement.removeAttribute('disabled'),
+    );
+  } else {
+    imageUploadFormSubmitElement.removeAttribute('disabled');
+  }
+};
 
 // Функция, которая показывает форму редактирования изображения
-function onOpenForm() {
+const onOpenForm = () => {
   imageEditingFormElement.classList.remove('hidden');
   document.body.classList.add('modal-open');
 
@@ -53,7 +79,7 @@ function onOpenForm() {
 
   // Добавим обработчик на отправку формы
   formElement.addEventListener('submit', onUserFormSubmit);
-}
+};
 
 // Функция, которая закрывает форму редактирования изображения
 function onCloseForm() {
@@ -73,36 +99,9 @@ function onCloseForm() {
   resetZoom();
 }
 
-// Функция обработки отправки формы
-function onUserFormSubmit(evt) {
-  evt.preventDefault();
-
-  const publishButtonElement = document.querySelector('.img-upload__submit');
-  publishButtonElement.setAttribute('disabled', true);
-
-  const isValid = onFormValidate(evt);
-
-  if (isValid) {
-    const formData = new FormData(evt.target);
-
-    sendDataOnServer(
-      formData,
-      () => {
-        onCloseForm();
-        successMessage();
-      },
-      () => errorMessage(),
-      () => publishButtonElement.removeAttribute('disabled'),
-    );
-  } else {
-    publishButtonElement.removeAttribute('disabled');
-  }
-}
-
-
-function setListenerFileUpload() {
+const setListenerFileUpload = () => {
   // Добавим обработчик на добавлнение изображения
   fileUploadControlElement.addEventListener('change', onOpenForm);
-}
+};
 
 export { setListenerFileUpload };
