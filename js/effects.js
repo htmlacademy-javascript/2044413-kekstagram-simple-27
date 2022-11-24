@@ -1,10 +1,13 @@
 // effects.js - модуль, который отвечает за наложение эффекта на изображение
 
 // найдем элемент предварительного просмотра изображения
-const previewElement = document.querySelector('.img-upload__preview img');
+const imagePreviewElement = document.querySelector('.img-upload__preview img');
 
 // найдем список эффектов
-const effectsListElement = document.querySelector('.effects__list');
+const effectListElement = document.querySelector('.effects__list');
+
+// найдем контейнер слайдера
+const containerSliderElement = document.querySelector('.effect-level');
 
 // найдем слайдер
 const sliderElement = document.querySelector('.effect-level__slider');
@@ -74,15 +77,16 @@ const effects = {
 let currentEffect = effects.none;
 
 // функция, которая добавляет эффект изображению
-const addEffect = function (effect) {
-  previewElement.style.filter = null;
-  previewElement.className = '';
-  previewElement.classList.add(`effects__preview--${effect.name}`);
+const addEffect = (effect) => {
+  imagePreviewElement.style.filter = null;
+  imagePreviewElement.className = '';
+  imagePreviewElement.classList.add(`effects__preview--${effect.name}`);
 
   const previousEffect = currentEffect;
   currentEffect = effect;
 
   if (effect.name === 'none') {
+    containerSliderElement.classList.add('visually-hidden');
     valueSliderElement.value = '';
 
     if (sliderElement.noUiSlider) {
@@ -92,6 +96,8 @@ const addEffect = function (effect) {
     valueSliderElement.value = effect.range.max;
 
     if (previousEffect.name === 'none') {
+      containerSliderElement.classList.remove('visually-hidden');
+
       noUiSlider.create(sliderElement, {
         range: {
           min: effect.range.min,
@@ -101,21 +107,19 @@ const addEffect = function (effect) {
         step: effect.step,
         connect: 'lower',
         format: {
-          to: function (value) {
+          to: (value) => {
             if (Number.isInteger(value)) {
               return value.toFixed(0);
             }
             return value.toFixed(1);
           },
-          from: function (value) {
-            return parseFloat(value);
-          },
+          from: (value) => parseFloat(value),
         }
       });
 
       sliderElement.noUiSlider.on('update', () => {
         valueSliderElement.value = sliderElement.noUiSlider.get();
-        previewElement.style.filter = `${currentEffect.filter}(${valueSliderElement.value}${currentEffect.measurement})`;
+        imagePreviewElement.style.filter = `${currentEffect.filter}(${valueSliderElement.value}${currentEffect.measurement})`;
       });
     } else {
       sliderElement.noUiSlider.updateOptions({
@@ -131,7 +135,7 @@ const addEffect = function (effect) {
 };
 
 // функция, для обработчика события кликов на эффекты
-const onAddEffect = function (evt) {
+const onAddEffect = (evt) => {
   const effect = effects[evt.target.value];
 
   if (effect) {
@@ -140,9 +144,10 @@ const onAddEffect = function (evt) {
 };
 
 // функция, которая сбрасывает эффект изображению
-const resetEffect = function () {
-  previewElement.className = '';
-  previewElement.style.filter = null;
+const resetEffect = () => {
+  imagePreviewElement.className = '';
+  imagePreviewElement.style.filter = null;
+  containerSliderElement.classList.add('visually-hidden');
   currentEffect = effects.none;
 
   if (sliderElement.noUiSlider) {
@@ -151,12 +156,12 @@ const resetEffect = function () {
 };
 
 // добавим обработчик события по кликам на эффекты
-function addEffectsContolsListeners() {
-  effectsListElement.addEventListener('click', onAddEffect);
-}
+const addEffectsContolsListeners = () => {
+  effectListElement.addEventListener('click', onAddEffect);
+};
 
-function removeEffectsContolsListeners() {
-  effectsListElement.removeEventListener('click', onAddEffect);
-}
+const removeEffectsContolsListeners = () => {
+  effectListElement.removeEventListener('click', onAddEffect);
+};
 
 export { resetEffect, addEffectsContolsListeners, removeEffectsContolsListeners };

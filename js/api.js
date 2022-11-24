@@ -3,7 +3,7 @@
 const BASE_URL = 'https://27.javascript.pages.academy/kekstagram-simple';
 
 // Функция для получения данных с сервера
-const getDataFromServer = function (onSuccess, onError) {
+const getDataFromServer = (onSuccess, onError) => {
   fetch(`${BASE_URL}/data`)
     .then((response) => {
       if (response.ok) {
@@ -18,7 +18,7 @@ const getDataFromServer = function (onSuccess, onError) {
 };
 
 // Функция для отправки данных на сервера
-const sendDataOnServer = function (data, onSuccess, onError, onFinally) {
+const sendDataOnServer = (data, onSuccess, onError, onFinally) => {
   fetch(
     BASE_URL,
     {
