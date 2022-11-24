@@ -9,7 +9,9 @@ const onEscKeyDownSuccessMessage = (evt) => {
 
     const successModalElement = document.querySelector('.success');
 
-    successModalElement.remove();
+    if(successModalElement) {
+      successModalElement.remove();
+    }
   }
 };
 
